@@ -25,10 +25,10 @@ struct StatusBadge: View {
     
     private var statusColor: Color {
         switch status {
-        case .planned:   .gray
-        case .scheduled: .blue
-        case .confirmed: .orange
-        case .approved:  .green
+        case .planned:   .blue
+        case .scheduled: .green
+        case .confirmed: .green
+        case .approved:  .red
         }
     }
 }

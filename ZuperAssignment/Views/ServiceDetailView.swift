@@ -5,8 +5,6 @@
 //  Created by Pavan Javali on 11/07/25.
 //
 
-import Foundation
-
 import SwiftUI
 import MapKit
 
@@ -36,24 +34,32 @@ struct ServiceDetailView: View {
             
             // ── Content
             VStack(alignment: .leading, spacing: 24) {
-                
                 header
+                
+                DetailItem(iconName: "user-circle",
+                           title: "Customer",
+                           value: service.customerName,
+                           iconColor: .blue)
                 
                 DetailItem(iconName: "text-description",
                            title: "Description",
-                           value: service.description)
+                           value: service.description,
+                           iconColor: .blue)
                 
                 DetailItem(iconName: "scheduled-time",
                            title: "Scheduled Time",
-                           value: SmartDateFormatter.string(from: service.scheduledAt))
+                           value: SmartDateFormatter.string(from: service.scheduledAt),
+                           iconColor: .blue)
                 
                 DetailItem(iconName: "map-pin",
                            title: "Location",
-                           value: "Hard-coded address near pin")
+                           value: "Hard-coded address near pin",
+                           iconColor: .blue)
                 
                 DetailItem(iconName: "notes",
                            title: "Service Notes",
-                           value: "• Arrive 15 min early\n• Confirm parts availability")
+                           value: "• Arrive 15 min early\n• Confirm parts availability",
+                           iconColor: .blue)
             }
             .padding(.horizontal)
             .padding(.bottom, 32)
@@ -62,31 +68,35 @@ struct ServiceDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
     
-    // MARK: – Header subsection
+    // MARK: – Header with centered status dot
     private var header: some View {
         VStack(alignment: .leading, spacing: 8) {
-            HStack(alignment: .top) {
+            HStack(alignment: .firstTextBaseline) {
                 Text(service.title)
                     .font(.title3.weight(.semibold))
                     .multilineTextAlignment(.leading)
-                Spacer(minLength: 4)
+                    .fixedSize(horizontal: false, vertical: true)
+                
+                Spacer(minLength: 6)
+                
                 Circle()
-                    .fill(priorityColor)
+                    .fill(statusDotColor)
                     .frame(width: 10, height: 10)
+                    .alignmentGuide(.firstTextBaseline) { context in
+                        context[VerticalAlignment.center] // vertically center it with the text baseline
+                    }
             }
-            
-            HStack {
-                StatusBadge(status: service.status)
-                Spacer()
-            }
+
+            StatusBadge(status: service.status)
         }
     }
-    
-    private var priorityColor: Color {
-        switch service.priority {
-        case .low:    .green
-        case .medium: .yellow
-        case .high:   .red
+    // status-specific colour
+    private var statusDotColor: Color {
+        switch service.status {
+        case .planned:  .blue
+        case .scheduled: Color(#colorLiteral(red: 0.49, green: 0.83, blue: 0.13, alpha: 1))// light green
+        case .confirmed: Color(#colorLiteral(red: 0.20, green: 0.78, blue: 0.35, alpha: 1))// green
+        case .approved:  .red
         }
     }
 }

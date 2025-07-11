@@ -5,8 +5,6 @@
 //  Created by Pavan Javali on 11/07/25.
 //
 
-import Foundation
-
 import SwiftUI
 
 struct ServicesListView: View {
@@ -14,32 +12,45 @@ struct ServicesListView: View {
     
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(viewModel.displayed) { service in
-                    NavigationLink(value: service) {
-                        ServiceRow(service: service)
-                            .padding(.vertical, 6)
+            VStack(spacing: 0) {
+                
+                // ── Search Bar with balanced spacing and divider ──
+                VStack(spacing: 0) {
+                    SearchBar(text: $viewModel.searchText) {
+                        print("Mic tapped") // placeholder
                     }
-                    .listRowSeparator(.hidden)
+                    .padding(.horizontal)
+                    .padding(.vertical, 12) // balanced top/bottom
+                    
+                    Divider()
+                }
+                
+                // ── Services List ────────────────────────────────
+                List {
+                    ForEach(viewModel.displayed) { service in
+                        NavigationLink(value: service) {
+                            ServiceRow(service: service)
+                                .padding(.vertical, 8)
+                        }
+                        .listRowSeparator(.hidden)
+                    }
+                }
+                .listStyle(.plain)
+                .refreshable { await viewModel.refresh() }
+                .animation(.default, value: viewModel.displayed)
+                .navigationDestination(for: Service.self) { ServiceDetailView(service: $0) }
+                .overlay {
+                    if viewModel.displayed.isEmpty && !viewModel.searchText.isEmpty {
+                        ContentUnavailableView(
+                            "No results",
+                            systemImage: "magnifyingglass",
+                            description: Text("Try a different search term")
+                        )
+                    }
                 }
             }
-            .listStyle(.plain)
             .navigationTitle("Services")
-            .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always))
-            .refreshable {
-                await viewModel.refresh()
-            }
-            .animation(.default, value: viewModel.displayed)
-            .navigationDestination(for: Service.self) { service in
-                ServiceDetailView(service: service)
-            }
-            .overlay {
-                if viewModel.displayed.isEmpty && !viewModel.searchText.isEmpty {
-                    ContentUnavailableView("No results",
-                                           systemImage: "magnifyingglass",
-                                           description: Text("Try a different search term"))
-                }
-            }
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
