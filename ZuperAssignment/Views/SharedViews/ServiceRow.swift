@@ -12,72 +12,81 @@ import SwiftUI
 struct ServiceRow: View {
     let service: Service
     
-    // MARK: – Body
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 10) {
             
-            HStack(alignment: .top, spacing: 6) {
+            // ── Title + priority dot
+            HStack(alignment: .top) {
                 Text(service.title)
-                    .font(.headline)
+                    .font(.system(.headline, design: .default).weight(.semibold))
+                    .foregroundColor(.primary)
+                    .multilineTextAlignment(.leading)
                     .lineLimit(2)
                 
-                Spacer(minLength: 4)
+                Spacer(minLength: 8)
                 
                 Circle()
                     .fill(priorityColor)
                     .frame(width: 8, height: 8)
-                    .accessibilityHidden(true)
+                    .padding(.top, 2)
             }
             
-            // Customer line
-            HStack(spacing: 4) {
+            // ── Customer row
+            HStack(spacing: 6) {
                 Image("user-circle")
+                    .resizable()
                     .renderingMode(.template)
+                    .foregroundColor(.secondary)
+                    .frame(width: 14, height: 14)
+                
                 Text(service.customerName)
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
             }
-            .font(.subheadline)
-            .foregroundStyle(.secondary)
             
-            // Description line
-            HStack(spacing: 4) {
+            // ── Description row
+            HStack(spacing: 6) {
                 Image("text-description")
+                    .resizable()
                     .renderingMode(.template)
+                    .foregroundColor(.secondary)
+                    .frame(width: 14, height: 14)
+                
                 Text(service.description)
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
                     .lineLimit(2)
             }
-            .font(.subheadline)
-            .foregroundStyle(.secondary)
             
-            // Status badge + date
+            // ── Badge and time
             HStack {
                 StatusBadge(status: service.status)
+                
                 Spacer()
+                
                 Text(SmartDateFormatter.string(from: service.scheduledAt))
                     .font(.footnote)
-                    .foregroundStyle(.secondary)
+                    .foregroundColor(.secondary)
             }
         }
         .padding()
         .background(
-            RoundedRectangle(cornerRadius: 12)
+            RoundedRectangle(cornerRadius: 14, style: .continuous)
                 .fill(Color(.systemBackground))
-                .shadow(color: .black.opacity(0.05), radius: 2, y: 1)
+                .shadow(color: .black.opacity(0.04), radius: 2, x: 0, y: 1)
         )
-        .accessibilityElement(children: .combine)
+        .padding(.horizontal)
     }
     
-    // MARK: – Helpers
     private var priorityColor: Color {
         switch service.priority {
-        case .low:    .green
+        case .low: .green
         case .medium: .yellow
-        case .high:   .red
+        case .high: .red
         }
     }
 }
 
 #Preview {
     ServiceRow(service: ServicesSampleData.list.first!)
-        .padding()
-        .previewLayout(.sizeThatFits)
 }
