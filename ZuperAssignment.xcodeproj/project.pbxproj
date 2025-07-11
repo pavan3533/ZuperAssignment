@@ -11,6 +11,8 @@
 		70AC895C2E215A8800CC1AE0 /* SmartDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AC895B2E215A8800CC1AE0 /* SmartDateFormatter.swift */; };
 		70AC895F2E215B4700CC1AE0 /* ServicesSampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AC895E2E215B4700CC1AE0 /* ServicesSampleData.swift */; };
 		70AC89642E215C5400CC1AE0 /* ServicesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AC89632E215C5400CC1AE0 /* ServicesViewModel.swift */; };
+		70AC89682E21600200CC1AE0 /* ServiceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AC89672E21600200CC1AE0 /* ServiceRow.swift */; };
+		70AC896A2E21608500CC1AE0 /* StatusBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AC89692E21608500CC1AE0 /* StatusBadge.swift */; };
 		70C72DD82E2150EF00D060A9 /* ZuperAssignmentApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C72DD72E2150EF00D060A9 /* ZuperAssignmentApp.swift */; };
 		70C72DDA2E2150EF00D060A9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C72DD92E2150EF00D060A9 /* ContentView.swift */; };
 		70C72DDC2E2150F000D060A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70C72DDB2E2150F000D060A9 /* Assets.xcassets */; };
@@ -42,6 +44,8 @@
 		70AC895B2E215A8800CC1AE0 /* SmartDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartDateFormatter.swift; sourceTree = "<group>"; };
 		70AC895E2E215B4700CC1AE0 /* ServicesSampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesSampleData.swift; sourceTree = "<group>"; };
 		70AC89632E215C5400CC1AE0 /* ServicesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesViewModel.swift; sourceTree = "<group>"; };
+		70AC89672E21600200CC1AE0 /* ServiceRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceRow.swift; sourceTree = "<group>"; };
+		70AC89692E21608500CC1AE0 /* StatusBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBadge.swift; sourceTree = "<group>"; };
 		70C72DD42E2150EF00D060A9 /* ZuperAssignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZuperAssignment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70C72DD72E2150EF00D060A9 /* ZuperAssignmentApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZuperAssignmentApp.swift; sourceTree = "<group>"; };
 		70C72DD92E2150EF00D060A9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -112,6 +116,23 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		70AC89652E215FCF00CC1AE0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				70AC89662E215FE200CC1AE0 /* SharedViews */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		70AC89662E215FE200CC1AE0 /* SharedViews */ = {
+			isa = PBXGroup;
+			children = (
+				70AC89672E21600200CC1AE0 /* ServiceRow.swift */,
+				70AC89692E21608500CC1AE0 /* StatusBadge.swift */,
+			);
+			path = SharedViews;
+			sourceTree = "<group>";
+		};
 		70C72DCB2E2150EF00D060A9 = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +156,7 @@
 		70C72DD62E2150EF00D060A9 /* ZuperAssignment */ = {
 			isa = PBXGroup;
 			children = (
+				70AC89652E215FCF00CC1AE0 /* Views */,
 				70AC89602E215BAF00CC1AE0 /* ViewModels */,
 				70AC89572E2158CC00CC1AE0 /* Models */,
 				70C72DD72E2150EF00D060A9 /* ZuperAssignmentApp.swift */,
@@ -302,7 +324,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				70AC895C2E215A8800CC1AE0 /* SmartDateFormatter.swift in Sources */,
+				70AC89682E21600200CC1AE0 /* ServiceRow.swift in Sources */,
 				70C72DDA2E2150EF00D060A9 /* ContentView.swift in Sources */,
+				70AC896A2E21608500CC1AE0 /* StatusBadge.swift in Sources */,
 				70AC89642E215C5400CC1AE0 /* ServicesViewModel.swift in Sources */,
 				70C72DD82E2150EF00D060A9 /* ZuperAssignmentApp.swift in Sources */,
 				70AC895F2E215B4700CC1AE0 /* ServicesSampleData.swift in Sources */,
